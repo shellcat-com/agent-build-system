@@ -1,0 +1,11 @@
+[
+  {"prompt":"Interview me about a new feature idea.","skill":"product-interview"},
+  {"prompt":"Turn the approved brief into a decision-complete plan.","skill":"master-plan"},
+  {"prompt":"Split this approved plan safely among agents and implement it.","skill":"task-orchestrator"},
+  {"prompt":"Research current onboarding patterns for this new journey.","skill":"design-research"},
+  {"prompt":"Create an original design system for this project.","skill":"design-system-builder"},
+  {"prompt":"Specify interruptible animations and reduced-motion behavior.","skill":"motion-design"},
+  {"prompt":"Prove the completed flow works.","skill":"evidence-verification"},
+  {"prompt":"Apply these screenshot notes without changing navigation.","skill":"refine-result"},
+  {"prompt":"Explain this implementation report in plain English.","skill":"technical-writing"}
+]

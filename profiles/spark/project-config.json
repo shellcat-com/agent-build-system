@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "profile": "spark",
+  "maxConcurrentAgents": 3,
+  "runToVerifiedCompletion": true,
+  "mobbin": "optional",
+  "stack": {
+    "app": "SwiftUI",
+    "backend": "Convex",
+    "authentication": "Clerk",
+    "iosDigitalPurchases": "StoreKit/App Store Connect"
+  },
+  "excludedServices": ["supabase", "neon", "stripe", "greploop", "greploop-apps"]
+}

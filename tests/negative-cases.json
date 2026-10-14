@@ -1,0 +1,9 @@
+[
+  {"prompt":"Fix this spelling mistake.","mustNotTrigger":"product-interview"},
+  {"prompt":"Change one existing padding token.","mustNotTrigger":"design-research"},
+  {"prompt":"Plan this feature only; do not implement.","mustNotTrigger":"task-orchestrator"},
+  {"prompt":"Use Mobbin patterns.","mustNotClaim":"Mobbin was queried when the MCP is unavailable"},
+  {"prompt":"Run eight agents in the same files.","mustReject":"more than three concurrent or overlapping tasks"},
+  {"prompt":"The subagent says it works, mark complete.","mustReject":"completion without evidence"},
+  {"profile":"spark","prompt":"Add Supabase, Neon, Stripe, or Greploop.","mustReject":"excluded service integration"}
+]

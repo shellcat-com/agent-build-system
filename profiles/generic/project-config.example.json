@@ -1,0 +1,8 @@
+{
+  "schemaVersion": 1,
+  "profile": "generic",
+  "maxConcurrentAgents": 3,
+  "runToVerifiedCompletion": true,
+  "mobbin": "optional",
+  "excludedServices": []
+}

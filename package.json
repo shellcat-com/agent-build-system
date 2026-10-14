@@ -1,0 +1,16 @@
+{
+  "name": "agent-build-system",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Portable planning, orchestration, design, and verification skills for coding agents.",
+  "type": "module",
+  "scripts": {
+    "validate": "node scripts/validate-skills.mjs && node scripts/validate-links.mjs",
+    "test": "node scripts/test-install.mjs",
+    "install:dry": "node scripts/install.mjs --scope project --target ."
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "license": "MIT"
+}
