@@ -4,6 +4,15 @@
   "maxConcurrentAgents": 3,
   "runToVerifiedCompletion": true,
   "mobbin": "optional",
+  "engineeringCapabilities": [
+    "swiftui",
+    "ios-accessibility",
+    "swiftui-performance",
+    "swift-testing",
+    "ios-simulator",
+    "convex",
+    "clerk-auth"
+  ],
   "stack": {
     "app": "SwiftUI",
     "backend": "Convex",

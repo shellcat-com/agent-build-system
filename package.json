@@ -1,6 +1,6 @@
 {
   "name": "agent-build-system",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "description": "Portable planning, orchestration, design, and verification skills for coding agents.",
   "type": "module",

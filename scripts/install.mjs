@@ -19,9 +19,17 @@ if (!new Set(["generic", "spark"]).has(profile)) throw new Error("--profile must
 if (scope === "project" && target === path.parse(target).root) throw new Error("Refusing to install into filesystem root");
 
 const operations = [];
-const skillsTarget = scope === "user" ? path.join(target, ".agents", "skills") : path.join(target, ".agents", "skills");
+const requestedSkillsTarget = path.join(target, ".agents", "skills");
+const skillsTarget = scope === "user" && fs.existsSync(requestedSkillsTarget)
+  ? fs.realpathSync(requestedSkillsTarget)
+  : requestedSkillsTarget;
 const claudeTarget = path.join(target, ".claude", "skills");
 const codexTarget = path.join(target, ".codex", "skills");
+
+function resolvesToSameDirectory(left, right) {
+  if (!fs.existsSync(left) || !fs.existsSync(right)) return false;
+  return fs.realpathSync(left) === fs.realpathSync(right);
+}
 
 function planCopyDir(from, to) {
   operations.push({ type: "copy-dir", from, to });
@@ -40,9 +48,12 @@ for (const entry of fs.readdirSync(path.join(sourceRoot, "skills"), { withFileTy
   if (!entry.isDirectory()) continue;
   const dest = path.join(skillsTarget, entry.name);
   planCopyDir(path.join(sourceRoot, "skills", entry.name), dest);
-  const relative = path.relative(claudeTarget, dest);
-  planLink(path.join(claudeTarget, entry.name), relative);
-  if (scope === "user") planLink(path.join(codexTarget, entry.name), path.relative(codexTarget, dest));
+  if (!resolvesToSameDirectory(claudeTarget, skillsTarget)) {
+    planLink(path.join(claudeTarget, entry.name), path.relative(claudeTarget, dest));
+  }
+  if (scope === "user" && !resolvesToSameDirectory(codexTarget, skillsTarget)) {
+    planLink(path.join(codexTarget, entry.name), path.relative(codexTarget, dest));
+  }
 }
 
 if (profile === "spark") {
@@ -51,8 +62,12 @@ if (profile === "spark") {
     if (!entry.isDirectory()) continue;
     const dest = path.join(skillsTarget, entry.name);
     planCopyDir(path.join(profileRoot, "skills", entry.name), dest);
-    planLink(path.join(claudeTarget, entry.name), path.relative(claudeTarget, dest));
-    if (scope === "user") planLink(path.join(codexTarget, entry.name), path.relative(codexTarget, dest));
+    if (!resolvesToSameDirectory(claudeTarget, skillsTarget)) {
+      planLink(path.join(claudeTarget, entry.name), path.relative(claudeTarget, dest));
+    }
+    if (scope === "user" && !resolvesToSameDirectory(codexTarget, skillsTarget)) {
+      planLink(path.join(codexTarget, entry.name), path.relative(codexTarget, dest));
+    }
   }
   if (scope === "project") {
     planCopyFile(path.join(profileRoot, "STACK.md"), path.join(target, "STACK.md"));
